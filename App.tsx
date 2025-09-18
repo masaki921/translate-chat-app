@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Session } from '@supabase/supabase-js';
-import * as supabaseService from './services/supabaseService.ts';
+import { onAuthStateChange, getSession, getProfile, signOut } from './services/supabaseService.ts';
 import { Profile } from './types.ts';
 import AuthScreen from './screens/AuthScreen.tsx';
 import FriendsListScreen from './screens/FriendsListScreen.tsx';
@@ -24,14 +24,14 @@ const AppContent: React.FC = () => {
 
   useEffect(() => {
     // Set up session listener on mount
-    const { data: authListener } = supabaseService.onAuthStateChange(
+    const { data: authListener } = onAuthStateChange(
       (_event, session) => {
         setSession(session);
       }
     );
 
     // Check for existing session right away
-    supabaseService.getSession().then((currentSession) => {
+    getSession().then((currentSession) => {
       setSession(currentSession);
     });
 
@@ -47,7 +47,7 @@ const AppContent: React.FC = () => {
       setIsLoading(true);
       const fetchProfileWithRetry = async (retries = 5, delay = 1000) => {
         try {
-          const fetchedProfile = await supabaseService.getProfile(session.user.id);
+          const fetchedProfile = await getProfile(session.user.id);
           if (fetchedProfile) {
             setProfile(fetchedProfile);
             setIsLoading(false);
@@ -85,7 +85,7 @@ const AppContent: React.FC = () => {
               <h1 className="text-2xl font-bold mb-4">{t('error')}</h1>
               <p className="mb-4">{profileError}</p>
               <button
-                  onClick={() => supabaseService.signOut()}
+                  onClick={() => signOut()}
                   className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors"
               >
                   {t('logout')}
@@ -121,7 +121,7 @@ const AppContent: React.FC = () => {
   };
   
   const handleLogout = async () => {
-    await supabaseService.signOut();
+    await signOut();
     setScreen('friends'); // Reset screen stack
   };
 
