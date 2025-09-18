@@ -1,0 +1,7 @@
+{
+  "name": "AI Translation Chat",
+  "description": "A LINE-style chat application where Japanese and Chinese speakers can communicate, with messages automatically translated by AI. This app demonstrates real-time translation in a familiar, user-friendly interface.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
