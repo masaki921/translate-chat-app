@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Session } from '@supabase/supabase-js';
-import { onAuthStateChange, getSession, getProfile, signOut } from '/services/supabaseService.ts';
-import { Profile } from '/types.ts';
-import AuthScreen from '/screens/AuthScreen.tsx';
-import FriendsListScreen from '/screens/FriendsListScreen.tsx';
-import ChatScreen from '/screens/ChatScreen.tsx';
-import AddFriendScreen from '/screens/AddFriendScreen.tsx';
-import VoiceCallScreen from '/screens/VoiceCallScreen.tsx';
-import { LocaleProvider, useLocale } from '/contexts/LocaleContext.tsx';
+import { onAuthStateChange, getSession, getProfile, signOut } from '@/services/supabaseService.ts';
+import { Profile } from '@/types.ts';
+import AuthScreen from '@/screens/AuthScreen.tsx';
+import FriendsListScreen from '@/screens/FriendsListScreen.tsx';
+import ChatScreen from '@/screens/ChatScreen.tsx';
+import AddFriendScreen from '@/screens/AddFriendScreen.tsx';
+import VoiceCallScreen from '@/screens/VoiceCallScreen.tsx';
+import { LocaleProvider, useLocale } from '@/contexts/LocaleContext.tsx';
 
 type Screen = 'friends' | 'chat' | 'addFriend' | 'voiceCall';
 
